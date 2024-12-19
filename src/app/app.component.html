@@ -1,6 +1,12 @@
 <app-container>
   <app-cabecalho></app-cabecalho>
 
+  <input
+    type="search"
+    placeholder="Digite para buscar"
+    [(ngModel)]="filtroPorTexto"
+  />
+
   <div *ngFor="let letra of alfabeto; trackBy: trackByFn">
     <app-separador>
       {{ letra }}
