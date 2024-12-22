@@ -14,6 +14,7 @@ interface Contato {
 }
 
 import agenda from './agenda.json';
+import { FormularioContatoComponent } from './paginas/formulario-contato/formulario-contato.component';
 
 @Component({
   selector: 'app-root',
@@ -26,6 +27,7 @@ import agenda from './agenda.json';
     SeparadorComponent,
     ContatoComponent,
     FormsModule,
+    FormularioContatoComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
@@ -39,20 +41,29 @@ export class AppComponent {
     return item;
   }
 
+  // Remove os acentos de uma string
+  private removerAcentos(texto: string): string {
+    return texto.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  }
+
   filtrarContatosPorTexto(): Contato[] {
     if (!this.filtroPorTexto) {
       return this.contatos;
     }
     return this.contatos.filter((contato) => {
-      return contato.nome
+      // Compara os nomes sem acentuações
+      return this.removerAcentos(contato.nome)
         .toLowerCase()
-        .includes(this.filtroPorTexto.toLowerCase());
+        .includes(this.removerAcentos(this.filtroPorTexto).toLowerCase());
     });
   }
 
   filtrarContatosPorLetraInicial(letra: string): Contato[] {
     return this.filtrarContatosPorTexto().filter((contato) => {
-      return contato.nome.toLowerCase().startsWith(letra);
+      // Compara a letra inicial sem considerar acentuações
+      return this.removerAcentos(contato.nome)
+        .toLowerCase()
+        .startsWith(this.removerAcentos(letra).toLowerCase());
     });
   }
 }
