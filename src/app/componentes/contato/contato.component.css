@@ -1,9 +1,8 @@
 .contato ul {
   display: flex;
-  padding: 0;
-  align-items: center;
   justify-content: space-between;
-  flex-wrap: wrap;
+  width: 100%;
+  padding: 0;
 }
 
 .contato ul li {
@@ -20,4 +19,8 @@
   background-color: transparent;
   border: none;
   cursor: pointer;
+}
+
+.contato__nome {
+  width: 85px;
 }
