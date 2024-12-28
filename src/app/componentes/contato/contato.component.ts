@@ -12,5 +12,6 @@ import { RouterLink } from '@angular/router';
 export class ContatoComponent {
   @Input() nome: string = '';
   @Input() telefone: string = '';
-  @Input() id?: number = 0;
+  @Input() id?: number;
+  @Input() avatar: string | ArrayBuffer = '';
 }

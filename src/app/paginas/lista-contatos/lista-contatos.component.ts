@@ -13,6 +13,7 @@ interface Contato {
   id: number;
   nome: string;
   telefone: string;
+  avatar: string | ArrayBuffer;
 }
 
 @Component({
